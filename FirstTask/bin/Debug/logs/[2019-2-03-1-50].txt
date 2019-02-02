@@ -1,0 +1,9 @@
+2019-02-03 01:50:05.348 +07:00 [INF] appsettings.json read successfully
+2019-02-03 01:50:05.357 +07:00 [INF] hello from constructor
+2019-02-03 01:50:05.360 +07:00 [INF] fileC:\a\New Документ Microsoft Word.docxcopying succsesfull
+2019-02-03 01:50:05.361 +07:00 [INF] fileC:\b\dfgdfgdfg.docxcopying succsesfull
+2019-02-03 01:50:05.362 +07:00 [INF] fileC:\b\New Text Document.txtcopying succsesfull
+2019-02-03 01:50:05.364 +07:00 [INF] fileC:\b\New Архив WinRAR.rarcopying succsesfull
+2019-02-03 01:50:05.365 +07:00 [INF] fileC:\b\New Лист Microsoft Excel (2).xlsxcopying succsesfull
+2019-02-03 01:50:05.366 +07:00 [INF] fileC:\b\New Лист Microsoft Excel.xlsxcopying succsesfull
+2019-02-03 01:50:05.368 +07:00 [INF] fileC:\b\1\2\New folder\New Bitmap Image.bmpcopying succsesfull

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using Serilog;
 
 namespace FirstTask
 {
@@ -11,9 +12,10 @@ namespace FirstTask
     {
         private readonly ILogger _logger;
 
-        public FileManager(ILogger<FileManager> logger)
+        public FileManager(ILogger logger)
         {
             _logger = logger;
+            _logger.Information("hello from constructor");
         }
 
         public void CopyTo(string sDir, string tDir)
@@ -28,6 +30,7 @@ namespace FirstTask
             foreach (FileInfo file in dirInfo.GetFiles("*.*"))
             {
                 File.Copy(file.FullName, Path.Combine(tDir, file.Name), true);
+                _logger.Information("file" + file.FullName + "copying succsesfull");
             }
 
             foreach (var dir in Directory.GetDirectories(sDir))

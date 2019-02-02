@@ -9,3 +9,8 @@ C:\Users\Konstantin\source\repos\FirstTask\FirstTask\obj\Debug\FirstTask.csproj.
 C:\Users\Konstantin\source\repos\FirstTask\FirstTask\obj\Debug\FirstTask.exe
 C:\Users\Konstantin\source\repos\FirstTask\FirstTask\obj\Debug\FirstTask.pdb
 C:\Users\Konstantin\source\repos\FirstTask\FirstTask\obj\Debug\FirstTask.csprojAssemblyReference.cache
+C:\Users\Konstantin\source\repos\FirstTask\FirstTask\bin\Debug\Serilog.dll
+C:\Users\Konstantin\source\repos\FirstTask\FirstTask\bin\Debug\Serilog.Sinks.File.dll
+C:\Users\Konstantin\source\repos\FirstTask\FirstTask\bin\Debug\Serilog.pdb
+C:\Users\Konstantin\source\repos\FirstTask\FirstTask\bin\Debug\Serilog.xml
+C:\Users\Konstantin\source\repos\FirstTask\FirstTask\bin\Debug\Serilog.Sinks.File.xml
