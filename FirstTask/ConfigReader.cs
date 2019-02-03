@@ -25,26 +25,29 @@ namespace FirstTask
 
             if (!File.Exists("appsettings.json"))
             {
-                logLevelSwitch.MinimumLevel = Serilog.Events.LogEventLevel.Warning;
-                config.logger.Warning("appsettings.json is not exist");
-                Log.CloseAndFlush();
-                throw new Exception();
+                config.logger.Error("appsettings.json is not exist");
+                throw new FileNotFoundException("appsettings.json");
             }
 
             config.properties = JsonConvert.DeserializeObject<jsonProperties>(File.ReadAllText("appsettings.json"));
+            config.logger.Debug("appsettings.json read successfully");
+
 
             switch (config.properties.debugLevel)
             {
                 case "Debug":
                     logLevelSwitch.MinimumLevel = Serilog.Events.LogEventLevel.Debug;
+                    config.logger.Information("Logging level set to debug");
                     break;
 
                 case "Error":
                     logLevelSwitch.MinimumLevel = Serilog.Events.LogEventLevel.Error;
+                    config.logger.Information("Logging level set to error");
                     break;
 
                 case "Information":
                     logLevelSwitch.MinimumLevel = Serilog.Events.LogEventLevel.Information;
+                    config.logger.Information("Logging level set to information");
                     break;
             }
             config.logger.Information("appsettings.json read successfully");

@@ -14,22 +14,48 @@ namespace FirstTask
     {
         static void Main(string[] args)
         {
-            Config config = new ConfigReader().ReadConfig();
+            Config config;
+            try
+            {
+                config = new ConfigReader().ReadConfig();
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("appsettings.json is not exists");
+                Console.ReadKey();
+                return;
+            }
+            
 
             IFileManager fileManager = new FileManager(logger: config.logger);
 
-            config.properties.sourceDir.ForEach(action: f =>
-             {
-                 try
+            if (string.IsNullOrEmpty(config.properties.targetDir))
+            {
+                config.logger.Fatal("string of target dir is empty");
+                return;
+            }
+                config.properties.sourceDir.ForEach(action: sourceDir =>
                  {
-                     fileManager.Process(f, config.properties.targetDir);
-                 }
-                 catch (Exception e)
-                 {
+                     try
+                     {
+                         if (string.IsNullOrEmpty(sourceDir))
+                         {
+                             throw new ArgumentNullException(nameof(sourceDir));
+                         }
+                         fileManager.Process(sourceDir, config.properties.targetDir);
+                     }
 
-                 }
-             });
-            Log.CloseAndFlush();
+                     catch (ArgumentNullException)
+                     {
+                         config.logger.Error("String {0} is null or empty", sourceDir);
+                     }
+                     catch (Exception e)
+                     {
+                         config.logger.Fatal("The process failed: {0}", e.Message);
+                     }
+                 });
+            
+
         }
     }
 }

@@ -15,7 +15,6 @@ namespace FirstTask
         public FileManager(ILogger logger)
         {
             _logger = logger;
-            _logger.Information("hello from constructor");
         }
 
         public void CopyTo(string sDir, string tDir)
@@ -23,14 +22,23 @@ namespace FirstTask
             DirectoryInfo dirInfo = new DirectoryInfo(tDir);
             if (!dirInfo.Exists)
             {
-                dirInfo.Create();
+                    dirInfo.Create();
+                    _logger.Debug("directory " + tDir + " created successfully");
             }
 
             dirInfo = new DirectoryInfo(sDir);
             foreach (FileInfo file in dirInfo.GetFiles("*.*"))
             {
-                File.Copy(file.FullName, Path.Combine(tDir, file.Name), true);
-                _logger.Information("file" + file.FullName + "copying succsesfull");
+                try
+                {
+                    File.Copy(file.FullName, Path.Combine(tDir, file.Name), true);
+                    _logger.Debug("File copy " + file.FullName + " successfully completed");
+                }
+
+                catch(Exception ex)
+                {
+                    _logger.Error("The process error: {0}", ex.Message);
+                }
             }
 
             foreach (var dir in Directory.GetDirectories(sDir))
@@ -44,14 +52,36 @@ namespace FirstTask
             var dirInfo = new DirectoryInfo(targetDirectory);
             if (!dirInfo.Exists)
             {
-                dirInfo.Create();
+                _logger.Information(targetDirectory + " is not exists");
+                try
+                {
+                    dirInfo.Create();
+                    _logger.Information("directory " + targetDirectory + " created successfully");
+                }
+                catch(Exception e)
+                {
+                    throw e;
+                }
             }
 
             string currentFolder = Path.GetFileName(sourceDirectoy) + DateTime.Now.ToString(" [yyyy-M-dd-H-mm]");
 
+            _logger.Debug("Start backup. Directory name: " + currentFolder);
+
+
             dirInfo.CreateSubdirectory(currentFolder);
 
-            CopyTo(sourceDirectoy, targetDirectory + "\\" + currentFolder);
+            _logger.Information("subbdirectory " + currentFolder + " created successfully");
+
+
+            try
+            {
+                CopyTo(sourceDirectoy, targetDirectory + "\\" + currentFolder);
+            }
+            catch(Exception e)
+            {
+
+            }
         }
     }
 }
