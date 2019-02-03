@@ -34,10 +34,24 @@ namespace FirstTask
                     File.Copy(file.FullName, Path.Combine(tDir, file.Name), true);
                     _logger.Debug("File copy " + file.FullName + " successfully completed");
                 }
-
+/*
+                catch(Exception ex) when (
+                ex is UnauthorizedAccessException ||
+                ex is ArgumentException ||
+                ex is ArgumentNullException ||
+                ex is PathTooLongException ||
+                ex is DirectoryNotFoundException ||
+                ex is FileNotFoundException ||
+                ex is IOException ||
+                ex is NotSupportedException)
+                {
+                    _logger.Error("File copy " + file.FullName + " failed. " + ex.Message);
+                }
+                дичь
+                */
                 catch(Exception ex)
                 {
-                    _logger.Error("The process error: {0}", ex.Message);
+                    throw ex;
                 }
             }
 
@@ -65,12 +79,10 @@ namespace FirstTask
             }
 
             string currentFolder = Path.GetFileName(sourceDirectoy) + DateTime.Now.ToString(" [yyyy-M-dd-H-mm]");
-
             _logger.Debug("Start backup. Directory name: " + currentFolder);
 
 
             dirInfo.CreateSubdirectory(currentFolder);
-
             _logger.Information("subbdirectory " + currentFolder + " created successfully");
 
 
@@ -78,9 +90,9 @@ namespace FirstTask
             {
                 CopyTo(sourceDirectoy, targetDirectory + "\\" + currentFolder);
             }
-            catch(Exception e)
+            catch(Exception ex)
             {
-
+                throw ex;
             }
         }
     }
