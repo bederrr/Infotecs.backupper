@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace FirstTask
 {
-    class ConfigReader : IConfigReader
+    class ConfigReader
     {
         public Config ReadConfig()
         {
@@ -29,7 +29,7 @@ namespace FirstTask
                 throw new FileNotFoundException("appsettings.json");
             }
 
-            config.properties = JsonConvert.DeserializeObject<jsonProperties>(File.ReadAllText("appsettings.json"));
+            config.properties = JsonConvert.DeserializeObject<Properties>(File.ReadAllText("appsettings.json"));
             config.logger.Debug("appsettings.json read successfully");
 
 

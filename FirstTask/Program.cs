@@ -7,17 +7,30 @@ using System.IO;
 using Newtonsoft.Json;
 using Serilog;
 using Serilog.Core;
+using Microsoft.Extensions.Configuration;
+
 
 namespace FirstTask
 {
     class Program
     {
+        private static Properties ReadAppsettings()
+        {
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetParent(AppContext.BaseDirectory).FullName)
+                .AddJsonFile("appsettings.json", false)
+                .Build();
+
+            return new Properties(sourceDir: configuration.GetSection("sourceDir").Get<List<string>>(),
+                                            targetDir: configuration["targetDir"].ToString(),
+                                            debugLevel: configuration["debugLevel"].ToString());
+        }
+
         static void Main(string[] args)
         {
-            Config config;
             try
             {
-                config = new ConfigReader().ReadConfig();
+                var properties = ReadAppsettings();
             }
             catch (Exception)
             {
