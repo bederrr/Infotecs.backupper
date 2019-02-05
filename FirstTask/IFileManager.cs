@@ -2,7 +2,7 @@
 {
     public interface IFileManager
     {
-        void Process(string sourceDir, string targetDir);
-        void CopyTo(string sourceDir, string targetDir);
+        void CreateCurrentDirectory(string sourceDir, string targetDir);
+        void Copy(string sourceDir, string targetDir);
     }
 }

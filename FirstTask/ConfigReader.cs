@@ -14,14 +14,17 @@ namespace FirstTask
     {
         public Config ReadConfig()
         {
-            var config = new Config();
+
 
             var logLevelSwitch = new LoggingLevelSwitch();
 
-            config.logger = new LoggerConfiguration()
+            var logger = new LoggerConfiguration()
                 .MinimumLevel.ControlledBy(logLevelSwitch)
                 .WriteTo.File("logs\\" + DateTime.Now.ToString("[yyyy-M-dd-H-mm]") + ".txt", rollingInterval: RollingInterval.Infinite)
                 .CreateLogger();
+            Log.Logger = new LoggerConfiguration().CreateLogger();
+
+            Log.CloseAndFlush();
 
             if (!File.Exists("appsettings.json"))
             {
@@ -29,7 +32,7 @@ namespace FirstTask
                 throw new FileNotFoundException("appsettings.json");
             }
 
-            config.properties = JsonConvert.DeserializeObject<Properties>(File.ReadAllText("appsettings.json"));
+            config.properties = JsonConvert.DeserializeObject<Appsettings>(File.ReadAllText("appsettings.json"));
             config.logger.Debug("appsettings.json read successfully");
 
 
@@ -52,6 +55,10 @@ namespace FirstTask
             }
             config.logger.Information("appsettings.json read successfully");
             return config;
+        }
+        public ConfigReader()
+        {
+
         }
     }
 }

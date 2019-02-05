@@ -17,7 +17,7 @@ namespace FirstTask
             _logger = logger;
         }
 
-        public void CopyTo(string sDir, string tDir)
+        public void Copy(string sDir, string tDir)
         {
             DirectoryInfo dirInfo = new DirectoryInfo(tDir);
             if (!dirInfo.Exists)
@@ -57,13 +57,14 @@ namespace FirstTask
 
             foreach (var dir in Directory.GetDirectories(sDir))
             {
-                CopyTo(dir, tDir + "\\" + Path.GetFileName(dir));
+                Copy(dir, tDir + "\\" + Path.GetFileName(dir));
             }
         }
 
-        public void Process(string sourceDirectoy, string targetDirectory)
+        public void CreateCurrentDirectory(string sourceDirectoy, string targetDirectory)
         {
             var dirInfo = new DirectoryInfo(targetDirectory);
+
             if (!dirInfo.Exists)
             {
                 _logger.Information(targetDirectory + " is not exists");
@@ -88,7 +89,7 @@ namespace FirstTask
 
             try
             {
-                CopyTo(sourceDirectoy, targetDirectory + "\\" + currentFolder);
+                Copy(sourceDirectoy, targetDirectory + "\\" + currentFolder);
             }
             catch(Exception ex)
             {

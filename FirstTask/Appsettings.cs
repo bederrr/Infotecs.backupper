@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace FirstTask
 {
-    public class Properties
+    public class Appsettings
     {
         public List<string> sourceDir { get; set; }
         public string targetDir { get; set; }
         public string debugLevel { get; set; }
 
-        public Properties(List<string> sourceDir, string targetDir, string debugLevel)
+        public Appsettings(List<string> sourceDir, string targetDir, string debugLevel)
         {
             this.sourceDir = sourceDir;
             this.targetDir = targetDir;

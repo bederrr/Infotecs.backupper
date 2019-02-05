@@ -14,40 +14,39 @@ namespace FirstTask
 {
     class Program
     {
-        private static Properties ReadAppsettings()
+        private static IConfiguration configuration;
+
+        private static IConfiguration GetConfiguration()
         {
-            IConfigurationRoot configuration = new ConfigurationBuilder()
+            return new ConfigurationBuilder()
                 .SetBasePath(Directory.GetParent(AppContext.BaseDirectory).FullName)
                 .AddJsonFile("appsettings.json", false)
                 .Build();
-
-            return new Properties(sourceDir: configuration.GetSection("sourceDir").Get<List<string>>(),
-                                            targetDir: configuration["targetDir"].ToString(),
-                                            debugLevel: configuration["debugLevel"].ToString());
         }
 
         static void Main(string[] args)
         {
             try
             {
-                var properties = ReadAppsettings();
+                configuration = GetConfiguration();
             }
-            catch (Exception)
+
+            catch (Exception e)
             {
-                Console.WriteLine("appsettings.json is not exists");
+                Console.WriteLine("appsettings.json is not exists. ", e.Message);
                 Console.ReadKey();
                 return;
             }
-            
 
             IFileManager fileManager = new FileManager(logger: config.logger);
 
-            if (string.IsNullOrEmpty(config.properties.targetDir))
+            if (string.IsNullOrEmpty(configuration["targetDir"].ToString()))
             {
                 config.logger.Fatal("string of target dir is empty");
                 return;
             }
-                config.properties.sourceDir.ForEach(action: sourceDir =>
+
+            configuration.GetSection("sourceDir").Get<List<string>>().ForEach(action: sourceDir =>
                  {
                      try
                      {
@@ -55,7 +54,7 @@ namespace FirstTask
                          {
                              throw new ArgumentNullException(nameof(sourceDir));
                          }
-                         fileManager.Process(sourceDir, config.properties.targetDir);
+                         fileManager.CreateCurrentDirectory(sourceDir, configuration["targetDir"].ToString());
                      }
 
                      catch (ArgumentNullException)
@@ -67,8 +66,6 @@ namespace FirstTask
                          config.logger.Fatal("The process failed: {0}", e.Message);
                      }
                  });
-            
-
         }
     }
 }
