@@ -1,1 +1,0 @@
-2019-02-03 06:50:37.960 +07:00 [ERR] appsettings.json is not exist

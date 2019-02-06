@@ -11,13 +11,12 @@ namespace FirstTask
 {
     public class FileManager : IFileManager
     {
-        private readonly ILogger _logger;
+        private ILogger _logger;
         public IServiceProvider services { get; set; }
 
-        public FileManager(ILogger logger, IServiceCollection serviceCollection)
+        public FileManager(ILogger logger)
         {
             _logger = logger;
-            ConfigureServices(serviceCollection);
         }
 
         public void Copy(string sDir, string tDir)
@@ -98,11 +97,6 @@ namespace FirstTask
             {
                 throw ex;
             }
-        }
-
-        private void ConfigureServices(IServiceCollection serviceCollection)
-        {
-            serviceCollection.AddSingleton<IPaymentService, PaymentService>();
         }
     }
 }

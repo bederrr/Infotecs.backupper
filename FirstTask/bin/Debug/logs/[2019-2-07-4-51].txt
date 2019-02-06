@@ -1,0 +1,4 @@
+2019-02-07 04:51:16.945 +07:00 [DBG] Start backup. Directory name: a [2019-2-07-4-51]
+2019-02-07 04:51:16.953 +07:00 [INF] subbdirectory a [2019-2-07-4-51] created successfully
+2019-02-07 04:51:16.955 +07:00 [DBG] File copy C:\a\New Text Document.txt successfully completed
+2019-02-07 04:51:16.957 +07:00 [DBG] File copy C:\a\New Архив ZIP - WinRAR.zip successfully completed

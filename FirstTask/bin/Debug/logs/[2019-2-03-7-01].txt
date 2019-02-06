@@ -1,4 +1,0 @@
-2019-02-03 07:01:10.570 +07:00 [ERR] appsettings.json is not exist
-2019-02-03 07:01:19.090 +07:00 [INF] Logging level set to debug
-2019-02-03 07:01:19.100 +07:00 [INF] appsettings.json read successfully
-2019-02-03 07:01:19.101 +07:00 [FTL] string of target dir is empty
