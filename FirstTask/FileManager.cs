@@ -5,16 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using Serilog;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace FirstTask
 {
     public class FileManager : IFileManager
     {
         private readonly ILogger _logger;
+        public IServiceProvider services { get; set; }
 
-        public FileManager(ILogger logger)
+        public FileManager(ILogger logger, IServiceCollection serviceCollection)
         {
             _logger = logger;
+            ConfigureServices(serviceCollection);
         }
 
         public void Copy(string sDir, string tDir)
@@ -95,6 +98,11 @@ namespace FirstTask
             {
                 throw ex;
             }
+        }
+
+        private void ConfigureServices(IServiceCollection serviceCollection)
+        {
+            serviceCollection.AddSingleton<IPaymentService, PaymentService>();
         }
     }
 }
