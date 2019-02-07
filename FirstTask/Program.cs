@@ -39,7 +39,15 @@ namespace FirstTask
 
         static void Main(string[] args)
         {
-            _configuration = ReadConfiguration();
+            try
+            {
+                _configuration = ReadConfiguration();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Unable to read configuration. " + ex.Message);
+                Console.ReadKey();
+            }
 
             var loggerConfiguration = CreateLoggerConfiguration();
 
@@ -47,7 +55,7 @@ namespace FirstTask
             ConfigureServices(_services, loggerConfiguration);
             _provider = _services.BuildServiceProvider();
 
-            IFileManager fileManager = _provider.GetService<IFileManager>();
+            IFileManager fileManager = _provider.GetRequiredService<IFileManager>();
 
             _configuration.GetSection("sourceDir").Get<List<string>>().ForEach(action: sourceDir =>
                  {
@@ -64,10 +72,10 @@ namespace FirstTask
                      {
                          Log.Logger.Error("String {0} is null or empty", sourceDir);
                      }
-                     catch (Exception e)
+                     catch (Exception ex)
                      {
 
-                         Log.Logger.Fatal("The process failed: {0}", e.Message);
+                         Log.Logger.Fatal("The process failed: {0}", ex.Message);
                      }
                  });
         }

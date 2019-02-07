@@ -24,8 +24,15 @@ namespace FirstTask
             DirectoryInfo dirInfo = new DirectoryInfo(tDir);
             if (!dirInfo.Exists)
             {
+                try
+                {
                     dirInfo.Create();
                     _logger.Debug("directory " + tDir + " created successfully");
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
 
             dirInfo = new DirectoryInfo(sDir);
@@ -36,24 +43,9 @@ namespace FirstTask
                     File.Copy(file.FullName, Path.Combine(tDir, file.Name), true);
                     _logger.Debug("File copy " + file.FullName + " successfully completed");
                 }
-/*
-                catch(Exception ex) when (
-                ex is UnauthorizedAccessException ||
-                ex is ArgumentException ||
-                ex is ArgumentNullException ||
-                ex is PathTooLongException ||
-                ex is DirectoryNotFoundException ||
-                ex is FileNotFoundException ||
-                ex is IOException ||
-                ex is NotSupportedException)
-                {
-                    _logger.Error("File copy " + file.FullName + " failed. " + ex.Message);
-                }
-                дичь
-                */
                 catch(Exception ex)
                 {
-                    throw ex;
+                    _logger.Error("File {0} copying error {1}", file.FullName, ex.Message);
                 }
             }
 
@@ -82,7 +74,7 @@ namespace FirstTask
             }
 
             string currentFolder = Path.GetFileName(sourceDirectoy) + DateTime.Now.ToString(" [yyyy-M-dd-H-mm]");
-            _logger.Debug("Start backup. Directory name: " + currentFolder);
+            _logger.Information("Start backup. Directory name: " + currentFolder);
 
 
             dirInfo.CreateSubdirectory(currentFolder);
@@ -95,7 +87,7 @@ namespace FirstTask
             }
             catch(Exception ex)
             {
-                throw ex;
+                _logger.Error("Folder copying error " + ex.Message);
             }
         }
     }
