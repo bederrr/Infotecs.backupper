@@ -294,3 +294,4 @@ C:\git\firsttask\FirstTask\bin\Debug\Serilog.Settings.Configuration.dll
 C:\git\firsttask\FirstTask\bin\Debug\Microsoft.Extensions.Options.xml
 C:\git\firsttask\FirstTask\bin\Debug\Microsoft.Extensions.Options.ConfigurationExtensions.xml
 C:\git\firsttask\FirstTask\bin\Debug\Serilog.Settings.Configuration.xml
+C:\git\firsttask\FirstTask\bin\Debug\appsettings.json

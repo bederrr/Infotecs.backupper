@@ -1,0 +1,15 @@
+2019-02-10 04:17:11.248 +07:00 [INF] Start backup. Directory name: a [2019-2-10-4-17]
+2019-02-10 04:17:11.256 +07:00 [INF] subbdirectory a [2019-2-10-4-17] created successfully
+2019-02-10 04:17:11.259 +07:00 [DBG] File copy C:\a\New Text Document.txt successfully completed
+2019-02-10 04:17:11.260 +07:00 [DBG] File copy C:\a\New Архив ZIP - WinRAR.zip successfully completed
+2019-02-10 04:17:11.261 +07:00 [INF] Start backup. Directory name: b [2019-2-10-4-17]
+2019-02-10 04:17:11.261 +07:00 [INF] subbdirectory b [2019-2-10-4-17] created successfully
+2019-02-10 04:17:11.262 +07:00 [DBG] File copy C:\b\dfgdfgdfg.docx successfully completed
+2019-02-10 04:17:11.263 +07:00 [DBG] File copy C:\b\New Text Document.txt successfully completed
+2019-02-10 04:17:11.265 +07:00 [DBG] File copy C:\b\New Архив WinRAR.rar successfully completed
+2019-02-10 04:17:11.266 +07:00 [DBG] File copy C:\b\New Лист Microsoft Excel (2).xlsx successfully completed
+2019-02-10 04:17:11.267 +07:00 [DBG] File copy C:\b\New Лист Microsoft Excel.xlsx successfully completed
+2019-02-10 04:17:11.268 +07:00 [DBG] directory C:\c\b [2019-2-10-4-17]\1 created successfully
+2019-02-10 04:17:11.268 +07:00 [DBG] directory C:\c\b [2019-2-10-4-17]\1\2 created successfully
+2019-02-10 04:17:11.268 +07:00 [DBG] directory C:\c\b [2019-2-10-4-17]\1\2\New folder created successfully
+2019-02-10 04:17:11.269 +07:00 [DBG] File copy C:\b\1\2\New folder\New Bitmap Image.bmp successfully completed
