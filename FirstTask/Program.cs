@@ -13,6 +13,10 @@ namespace FirstTask
         private static IServiceProvider _provider { get; set; }
         private static IConfiguration _configuration { get; set; }
 
+
+        /// <summary>
+        /// Read configuration from appsettings.json
+        /// </summary>
         private static IConfiguration ReadConfiguration()
         {
             return new ConfigurationBuilder()
@@ -21,6 +25,9 @@ namespace FirstTask
                 .Build();
         }
 
+        /// <summary>
+        /// Sets up logging
+        /// </summary>
         private static LoggerConfiguration CreateLoggerConfiguration()
         {
             return new LoggerConfiguration()
@@ -28,6 +35,10 @@ namespace FirstTask
                 .WriteTo.File("logs\\" + DateTime.Now.ToString("[yyyy-M-dd-H-mm]") + ".txt", rollingInterval: RollingInterval.Infinite);
         }
 
+
+        /// <summary>
+        /// Configure services for Dependency Injection
+        /// </summary>
         private static void ConfigureServices(IServiceCollection services, LoggerConfiguration loggerConfiguration)
         {
             Log.Logger = loggerConfiguration.CreateLogger();
@@ -65,7 +76,7 @@ namespace FirstTask
                          {
                              throw new ArgumentNullException(nameof(sourceDir));
                          }
-                         fileManager.CreateCurrentDirectory(sourceDir, _configuration["targetDir"].ToString());
+                         fileManager.StartBackup(sourceDir, _configuration["targetDir"].ToString());
                      }
 
                      catch (ArgumentNullException)
@@ -74,7 +85,6 @@ namespace FirstTask
                      }
                      catch (Exception ex)
                      {
-
                          Log.Logger.Fatal("The process failed: {0}", ex.Message);
                      }
                  });

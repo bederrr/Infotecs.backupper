@@ -19,6 +19,9 @@ namespace FirstTask
             _logger = logger;
         }
 
+        /// <summary>
+        /// Recursive check and copy directory
+        /// </summary>
         public void Copy(string sDir, string tDir)
         {
             DirectoryInfo dirInfo = new DirectoryInfo(tDir);
@@ -55,7 +58,10 @@ namespace FirstTask
             }
         }
 
-        public void CreateCurrentDirectory(string sourceDirectoy, string targetDirectory)
+        /// <summary>
+        /// Create current and target directories and start backup
+        /// </summary>
+        public void StartBackup(string sourceDirectoy, string targetDirectory)
         {
             var dirInfo = new DirectoryInfo(targetDirectory);
 
@@ -76,10 +82,8 @@ namespace FirstTask
             string currentFolder = Path.GetFileName(sourceDirectoy) + DateTime.Now.ToString(" [yyyy-M-dd-H-mm]");
             _logger.Information("Start backup. Directory name: " + currentFolder);
 
-
             dirInfo.CreateSubdirectory(currentFolder);
             _logger.Information("subbdirectory " + currentFolder + " created successfully");
-
 
             try
             {
